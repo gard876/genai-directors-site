@@ -3,615 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GenAI Directors | AI Strategy Roadmaps</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>GenAI Directors | Strategy & Transformation</title>
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; }
-        .shine-button {
+        /* COLOR PALETTE (60-30-10 Rule)
+           --------------------------------------------------
+           60% Primary:   #0b2416 (Deep Forest Green)
+           30% Secondary: #1c1917 (Dark Earthy Brown/Charcoal)
+           10% Accent:    #d4af37 (Metallic Gold)
+           
+           SPICE COLORS (Subtle Tech Gradients):
+           Purple: #9d4edd, Orange: #fb8500, Bright Green: #00ff41
+        */
+
+        :root {
+            --bg-primary: #0b2416;
+            --bg-secondary: #1c1917;
+            --text-main: #e5e7eb;
+            --text-muted: #a3a3a3;
+            --accent-gold: #d4af37;
+            --gradient-spice: linear-gradient(90deg, #9d4edd 0%, #fb8500 50%, #00ff41 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.8;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        /* MAIN CONTAINER */
+        .card {
+            background-color: var(--bg-secondary);
+            max-width: 800px;
+            width: 100%;
+            border-radius: 4px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
             position: relative;
             overflow: hidden;
-            background: #16a34a; /* Green-600 */
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 15px rgba(22, 163, 74, 0.4);
+            border: 1px solid rgba(212, 175, 55, 0.1); /* Subtle gold border */
         }
-        .shine-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(22, 163, 74, 0.6);
-            background-color: #15803d; /* Green-700 */
-        }
-        @keyframes sheen {
-            0% { background-position: -100% 0; }
-            100% { background-position: 200% 0; }
-        }
-        .animate-shimmer {
-            background-image: linear-gradient(
-                110deg,
-                transparent 0%,
-                transparent 40%,
-                rgba(255, 255, 255, 0.4) 50%, 
-                transparent 60%,
-                transparent 100%
-            );
-            background-size: 250% 100%;
-            animation: sheen 4s infinite linear;
-        }
-        /* Style for the visualization */
-        .viz-card { @apply bg-neutral-900 border border-white/10 rounded-xl p-3 shadow-lg; }
-        .viz-arrow-container { @apply flex flex-col items-center justify-content justify-around h-full; }
-        
-        .faq-question { cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out; padding: 0 0 0 0; }
-        .faq-answer.open { max-height: 500px; padding: 0 0 16px 0; }
 
-        /* Modal Styles */
-        .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 1000; 
-            left: 0;
+        /* TOP BORDER ACCENT (The Spice) */
+        .card::before {
+            content: '';
+            position: absolute;
             top: 0;
-            width: 100%; 
-            height: 100%; 
-            overflow: auto; 
-            background-color: rgba(0,0,0,0.9); 
-            padding-top: 60px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-spice);
         }
-        .modal-content {
-            background-color: #1f2937; /* neutral-800 */
-            margin: 5% auto; 
-            padding: 30px;
-            border: 1px solid rgba(255,255,255,0.1);
-            width: 90%; 
-            max-width: 800px;
-            border-radius: 1rem;
+
+        .content-wrapper {
+            padding: 3rem 2.5rem;
         }
-        .close-btn {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
+
+        /* HEADER SECTION */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 2rem;
         }
-        .close-btn:hover,
-        .close-btn:focus {
+
+        /* PROFILE IMAGE FRAME */
+        .profile-frame {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 1.5rem auto;
+            border-radius: 50%;
+            padding: 3px;
+            /* Gradient border using the spice colors */
+            background: var(--gradient-spice);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.15); /* Subtle green glow */
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--bg-secondary);
+            background-color: #333;
+            display: block;
+        }
+
+        h1 {
+            color: var(--accent-gold);
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        /* TEXT CONTENT */
+        .prose {
+            color: #d1d5db;
+            font-size: 1.05rem;
+        }
+
+        .prose p {
+            margin-bottom: 1.5rem;
+            text-align: justify; /* Sophisticated alignment */
+        }
+
+        /* Highlight specific dates or terms */
+        .highlight {
+            color: white;
+            font-weight: 600;
+        }
+        
+        /* Subtle colored highlights for specific terms to use the spice palette sparingly */
+        .accent-green { color: #00ff41; }
+
+        /* FOOTER / CONTACT */
+        footer {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .cta-container {
+            display: inline-block;
+            border: 1px solid var(--accent-gold);
+            padding: 1rem 2rem;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-container:hover {
+            background-color: rgba(212, 175, 55, 0.1);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .contact-label {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .email-link {
             color: #fff;
             text-decoration: none;
-            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            font-family: 'Georgia', serif;
+        }
+
+        /* RESPONSIVE TWEAKS */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .content-wrapper { padding: 2rem 1.5rem; }
+            .prose p { text-align: left; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Questionnaire Modal (Hidden by default) -->
-    <div id="questionnaireModal" class="modal">
-        <div class="modal-content relative">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 class="text-3xl font-bold mb-6 text-white">Your 10-Point Strategy Intake</h2>
-            <p class="text-gray-400 mb-6">Fill out the form below. When ready, click "Submit Answers & Finalize Blueprint" to confirm your payment and send us your strategic answers.</p>
+    <div class="card">
+        <div class="content-wrapper">
+            <header>
+                <div class="profile-frame">
+                    <img src="https://i.postimg.cc/63XC3dGq/Untitled-(1).png" alt="Founder Portrait" class="profile-img">
+                </div>
+                <h1>GenAI Directors</h1>
+                <div class="subtitle">Digital Transformation & Strategy</div>
+            </header>
 
-            <form id="intakeForm" class="space-y-6">
-                <!-- Question 1 -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2">1. Business & Revenue: What does your business do and how do you make money today?</label>
-                    <textarea required rows="3" id="q1" class="w-full bg-black border border-white/20 rounded-lg p-3 text-white focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none transition-colors"></textarea>
-                </div>
-                <!-- Question 2 -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2">2. Target Audience: Who is your ideal customer profile?</label>
-                    <textarea required rows="3" id="q2" class="w-full bg-black border border-white/20 rounded-lg p-3 text-white focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none transition-colors"></textarea>
-                </div>
-                <!-- Question 3 -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2">3. Current Tech Stack: What software/tools are you currently using? (CRM, Email, etc.)</label>
-                    <textarea required rows="3" id="q3" class="w-full bg-black border border-white/20 rounded-lg p-3 text-white focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none transition-colors"></textarea>
-                </div>
-                <!-- Question 4 -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2">4. Biggest Bottleneck: What is the #1 problem slowing your growth right now?</label>
-                    <textarea required rows="3" id="q4" class="w-full bg-black border border-white/20 rounded-lg p-3 text-white focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none transition-colors"></textarea>
-                </div>
-                <!-- Question 5 -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2">5. Manual Tasks: What repetitive tasks eat up most of your team's time?</label>
-                    <textarea required rows="3" id="q5" class="w-full bg-black border border-white/20 rounded-lg p-3 text-white focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none transition-colors"></textarea>
-                </div>
-                <!-- Question 6 -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2">6. Marketing Channels: Where do your leads come from currently?</label>
-                    <textarea required rows="3" id="q6" class="w-full bg-black border border-white/20 rounded-lg p-3 text-white focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none transition-colors"></textarea>
-                </div>
-                <!-- Question 7 -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2">7. Sales Process: Describe your current sales workflow.</label>
-                    <textarea required rows="3" id="q7" class="w-full bg-black border border-white/20 rounded-lg p-3 text-white focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none transition-colors"></textarea>
-                </div>
-                <!-- Question 8 -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2">8. Data Assets: Do you have existing content, call recordings, or SOPs we can use?</label>
-                    <textarea required rows="3" id="q8" class="w-full bg-black border border-white/20 rounded-lg p-3 text-white focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none transition-colors"></textarea>
-                </div>
-                <!-- Question 9 -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2">9. AI Experience: Have you tried implementing AI before?</label>
-                    <textarea required rows="3" id="q9" class="w-full bg-black border border-white/20 rounded-lg p-3 text-white focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none transition-colors"></textarea>
-                </div>
-                <!-- Question 10 -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2">10. 12-Month Goal: What is the specific revenue or operational goal for the next year?</label>
-                    <textarea required rows="3" id="q10" class="w-full bg-black border border-white/20 rounded-lg p-3 text-white focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none transition-colors"></textarea>
-                </div>
-
-                <!-- Footer CTA and Instructions -->
-                <div class="flex flex-col space-y-4 pt-6">
-                    <!-- The button that triggers the PayPal payment -->
-                    <button type="submit" id="finalSubmitButton" class="w-full py-4 text-white font-bold rounded-xl text-lg shine-button animate-shimmer flex items-center justify-center gap-2">
-                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.007 12.007 0 002.944 12c0 3.04.996 5.842 2.652 8.163A12.007 12.007 0 0012 21.056c3.04 0 5.842-.996 8.163-2.652A12.007 12.007 0 0021.056 12a12.007 12.007 0 00-2.652-8.163z"></path></svg>
-                         Submit Answers & Finalize Blueprint
-                    </button>
-                    <p class="text-xs text-gray-500 text-center">A confirmation email containing your answers and next steps will be sent shortly.</p>
-                </div>
-            </form>
-        </div>
-    </div>
-
-
-    <!-- Navigation Header --><nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <svg viewBox="0 0 100 100" class="w-10 h-10">
-                    <defs><linearGradient id="navGrad" x1="0%" y1="0%" y2="100%"><stop offset="0%" stop-color="#a855f7" /><stop offset="100%" stop-color="#3b82f6" /></linearGradient></defs>
-                    <path d="M50 5 L75 50 L50 95 L25 50 Z" fill="url(#navGrad)" stroke="white" stroke-width="3" />
-                </svg>
-                <span class="text-xl font-bold tracking-tighter">GenAI Directors</span>
+            <div class="prose">
+                <p>
+                    I started <strong>GenAI Directors</strong> after discovering a gap in the marketplace for business consulting services within SMBs. Historically, businesses would outsource Software/CRM Development, Digital Marketing, and Information Security to three different companies. While that may still be the case for many companies in the future, a major shift is happening.
+                </p>
+                <p>
+                    New AI job roles have been created within enterprise companies, with consulting firms like Accenture, BCG, and the Big 4 leading digital transformation projects. These initiatives create strategy roadmaps for companies to leverage GenAI in their business operations.
+                </p>
+                <p>
+                    GenAI Directors and Chief AI Officers do not come from a specific background; however, many in IT, Sales, and Communications are assuming these roles. GenAI Creative Director positions are now being created at large marketing firms. I identified this trend early after seeing Chase Bank create a position for a GenAI Director in mid-2025.
+                </p>
+                <p>
+                    I secured the domains <span class="highlight">genaidirectors.com</span> and <span class="highlight">genaicreativedirector.com</span>. I spent the second half of the year researching this new emerging job role and the approaches consulting firms take for digital transformation strategy roadmaps. Leveraging my network of talented Software Architects, Digital Marketers, and Security Professionals, I created a methodology to complete high-level creative strategy roadmaps for SMBs.
+                </p>
+                <p>
+                    I am not sure where the direction of GenAIDirectors.com will go in the future. However, for now, a resource-based website is coming soon, featuring blogs and eBooks.
+                </p>
+                <p>
+                    <span class="highlight" style="border-bottom: 2px solid #fb8500;">As of mid-January 2026, I am accepting clients for digital transformation strategy roadmaps.</span> The goal is to maximize RevOps using new <span class="accent-green">GenAI</span> and <span class="accent-green">Agentic AI</span> that can be leveraged into your current tech stack.
+                </p>
             </div>
-            <a href="#pricing" class="hidden md:block px-6 py-2 bg-green-600 hover:bg-green-500 text-black font-bold rounded-full transition-all">
-                Get Roadmap
-            </a>
         </div>
-    </nav>
 
-    <!-- Header / Hero Section (Title and Summary) --><header class="relative pt-32 pb-12 px-6 overflow-hidden">
-        <div class="max-w-7xl mx-auto text-center relative z-10">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-6">
-                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                <span class="text-xs font-medium text-green-400">Designing AI Systems for SMBs</span>
-            </div>
-            <h1 class="text-4xl md:text-6xl font-bold tracking-tight leading-tight mb-6">
-                We design AI RainMaker Systems <br />
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-green-400 to-blue-500">that help you make money and save time</span>
-            </h1>
-            <p class="text-lg text-gray-400 max-w-3xl mx-auto mb-8">
-                Companies will be made like films. We are the Director. We create strategy roadmaps to build custom AI Systems, orchestrating tools to solve your specific business challenges.
+        <footer>
+            <p style="color: #888; font-size: 0.9rem; margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                We provide you with a strategy roadmap including a well-thought-out review and plan for the future, backed by me and my internal team of contractors and consulting firms.
             </p>
-        </div>
-    </header>
-
-    <!-- 1. The Shift to Agentic Workflows (Problem/Solution) -->
-    <section class="py-20 px-6 max-w-7xl mx-auto border-b border-white/5">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl font-bold mb-4">The Shift to Agentic Workflows</h2>
-            <p class="text-gray-400">Stop drowning in manual tasks. Start orchestrating intelligence.</p>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            <div class="p-8 rounded-3xl border border-white/10 bg-neutral-900/50">
-                <div class="flex items-center gap-3 mb-6 border-b border-white/10 pb-4"><svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><h3 class="text-xl font-bold text-gray-300">The Old Manual Way</h3></div>
-                <ul class="space-y-6">
-                    <li><h4 class="font-bold text-white opacity-100">Disconnected Data</h4><p class="text-sm text-gray-400 opacity-90">Manually copy-pasting from CRM to Email to Spreadsheets. Errors are inevitable.</p></li>
-                    <li><h4 class="font-bold text-white opacity-100">Slow Production</h4><p class="text-sm text-gray-400 opacity-90">Writing one blog post or proposal takes hours of human effort and editing.</p></li>
-                    <li><h4 class="font-bold text-white opacity-100">Human Bottleneck</h4><p class="text-sm text-gray-500 opacity-90">Strategy stops when the founder is busy.</p></li>
-                </ul>
-            </div>
-
-            <div class="p-8 rounded-3xl border border-green-500/30 bg-gradient-to-br from-green-900/20 to-black relative shadow-[0_0_30px_rgba(22,163,74,0.1)]">
-                <div class="absolute -top-4 -right-4 bg-green-600 text-white text-xs font-bold px-4 py-1 rounded-full shadow-lg">FUTURE</div>
-                <ul class="space-y-6">
-                    <li><h4 class="font-bold text-white">Unified Intelligence</h4><p class="text-sm text-gray-400">Agents sync data instantly. Your Vector DB remembers every customer interaction.</p></li>
-                    <li><h4 class="font-bold text-white">24/7 Execution</h4><p class="text-sm text-gray-400">Agents write code, draft emails, and analyze data while you sleep.</p></li>
-                    <li><h4 class="font-bold text-white">Generative Power</h4><p class="text-sm text-gray-400">Produce unlimited assets (Video, Voice, Code) tailored to your brand voice.</p></li>
-                </ul>
-            </div>
-        </div>
-    </section>
             
-    <!-- 2. Tool Stack Visualizer (The simple pyramid list) --><section class="py-12 px-6 max-w-7xl mx-auto">
-        <div class="text-center mb-12">
-            <h2 class="text-4xl font-bold mb-4">Platforms and tools we work with</h2>
-            <p class="text-gray-400 max-w-3xl mx-auto">The strategic combination of these platforms, mixed with research-backed prompting along with RainMaker Strategy and Creativity combined, creates a constant flow of Business Strategy, Content, and Sales Processes working in orchestration for optimized transformation and successful innovation.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- CORE LLM INTELLIGENCE -->
-            <div class="p-4 rounded-xl border border-blue-500/30 bg-neutral-800 shadow-xl">
-                <p class="text-sm font-bold text-blue-500 mb-1">CORE LLM INTELLIGENCE</p>
-                <p class="text-xs text-gray-400">Gemini, Claude, ChatGPT: Provide strategic reasoning and multimodal logic.</p>
+            <div class="cta-container">
+                <span class="contact-label">Contact Me</span>
+                <a href="mailto:alex@genaidirectors.com" class="email-link">alex@genaidirectors.com</a>
             </div>
-            
-            <!-- OUTPUT & CONTENT ENGINE (Includes Video/Audio/Avatars) -->
-            <div class="p-4 rounded-xl border border-purple-500/30 bg-neutral-800 shadow-xl">
-                <p class="text-sm font-bold text-purple-500 mb-1">OUTPUT & CONTENT ENGINE</p>
-                <p class="text-xs text-gray-400">ElevenLabs, Vapi, HeyGen (Avatars), Granola AI: Voice AI, synthetic media, and audio/video output creation.</p>
-            </div>
-            
-            <!-- DATA & KNOWLEDGE -->
-            <div class="p-4 rounded-xl border border-pink-500/30 bg-neutral-800 shadow-xl">
-                <p class="text-sm font-bold text-pink-500 mb-1">DATA & KNOWLEDGE</p>
-                <p class="text-xs text-gray-400">Notion, Supabase (Vector DB), Airtable: Tools for knowledge management, structured data handling, and custom vector storage.</p>
-            </div>
-            
-            <!-- ORCHESTRATION & REV OPS -->
-            <div class="p-4 rounded-xl border border-orange-500/30 bg-neutral-800 shadow-xl">
-                <p class="text-sm font-bold text-orange-500 mb-1">ORCHESTRATION & REV OPS</p>
-                <p class="text-xs text-gray-400">n8n, Make, ChatGPT Agent Builder: Workflow automation and connecting all platforms for RevOps.</p>
-            </div>
-            
-            <!-- DATA & ACQUISITION (PROSPECTING) -->
-            <div class="p-4 rounded-xl border border-cyan-500/30 bg-neutral-800 shadow-xl">
-                <p class="sm font-bold text-cyan-500 mb-1">DATA & ACQUISITION</p>
-                <p class="text-xs text-gray-400">Apollo, Clay, Apify, Perplexity: Prospecting, data scraping, and real-time intelligence gathering.</p>
-            </div>
-            
-            <!-- VISUAL / FRONT-END OUTPUT -->
-            <div class="p-4 rounded-xl border border-yellow-500/30 bg-neutral-800 shadow-xl">
-                <p class="sm font-bold text-yellow-500 mb-1">VISUAL / FRONT-END DESIGN</p>
-                <p class="text-xs text-gray-400">Canva, Google Studio, Lovable: Creating high-fidelity presentations, websites, and sales/marketing visuals.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. AI System Architecture Blueprint (Visualization) -->
-    <div class="py-12 px-6">
-        <div class="max-w-6xl mx-auto text-center mb-8">
-            <h3 class="text-3xl font-bold text-white">AI System Architecture Blueprint</h3>
-        </div>
-        
-        <div class="relative w-full max-w-6xl mx-auto bg-neutral-900/50 rounded-3xl border border-white/10 p-8 pt-6 shadow-2xl overflow-hidden">
-            
-            <!-- Three Columns (Grid and Spacing) -->
-            <!-- Using a 10-column grid to push the agents left and center the DB properly -->
-            <div class="grid grid-cols-10 gap-4 h-[350px]">
-
-                <!-- Column 1: CRM Data (Source) - col-span-2 -->
-                <div class="col-span-2 flex items-center justify-start order-1 h-full">
-                    <div class="p-5 w-full max-w-xs viz-card border-blue-500/30">
-                        <!-- CRM Title Block -->
-                        <div class="flex items-center gap-2 mb-4 border-b border-white/10 pb-3">
-                            <svg class="w-4 h-4 text-blue-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10a2 2 0 002 2h12a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 7h-2m2 0V9m-2 7H7m2 0V9m-4 7H4m-1 0a2 2 0 01-2-2V5a2 2 0 012-2h10a2 2 0 012 2v14a2 2 0 01-2 2H7a2 2 0 01-2-2z"></path></svg>
-                            <h3 class="font-bold text-md text-white whitespace-nowrap overflow-hidden">CRM</h3>
-                        </div>
-                        <!-- CRM List Items - Fixed alignment by manually adjusting list padding/margin to zero -->
-                        <div class="space-y-2 text-xs">
-                            <p class="text-blue-300">Documents</p>
-                            <p class="text-green-300">Invoices</p>
-                            <p class="text-yellow-300">Reports</p>
-                            <p class="text-red-300">Transactions</p>
-                            <p class="text-pink-300">Communications</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Separator 1 (Left <-> Center) - col-span-1 --><div class="col-span-1 flex items-center justify-center order-2">
-                    <!-- ARROWS DELETED -->
-                </div>
-
-                <!-- Column 2: Agents (Processor) - col-span-4 --><div class="col-span-4 flex flex-col items-center justify-center space-y-3 order-3 h-full">
-                    <div class="viz-card w-56 border-green-500/30"><h4 class="font-bold text-sm text-white">Task Agent</h4><p class="text-xs text-gray-400 leading-tight">Processes tasks</p></div>
-                    <div class="viz-card w-56 border-green-500/30"><h4 class="font-bold text-sm text-white">Finance Agent</h4><p class="text-xs text-gray-400 leading-tight">Analyzes cashflow</p></div>
-                    <div class="viz-card w-64 p-4 border-yellow-500/60 bg-gradient-to-r from-yellow-900/40 to-black transform scale-105"><h4 class="font-bold text-base text-white">RainMaker Agent</h4><p class="text-sm text-yellow-200/90 mt-0.5">Strategy, Content, and Idea Generator</p></div>
-                    <div class="viz-card w-56 border-purple-500/30"><h4 class="font-bold text-sm text-white">Sales Assistant Agent</h4><p class="text-xs text-gray-400 leading-tight">Drafts proposals</p></div>
-                    <div class="viz-card w-56 border-pink-500/30"><h4 class="font-bold text-sm text-white">Social Agent</h4><p class="text-xs text-gray-400 leading-tight">Distributes Content</p></div>
-                </div>
-
-                <!-- Separator 2 (Center <-> Right) - col-span-1 --><div class="col-span-1 flex items-center justify-center order-4">
-                     <!-- ARROWS DELETED -->
-                </div>
-
-                <!-- Column 3: AI Knowledge (Intelligence) - Middle Right - col-span-2 -->
-                <!-- Centered vertically due to h-full and flex items-center -->
-                <div class="col-span-2 flex items-center justify-center order-5 h-full">
-                    <div class="relative w-40 h-40 flex items-center justify-center">
-                        <div class="absolute inset-0 bg-purple-600/20 rounded-full blur-3xl"></div>
-                        <div class="relative w-32 h-32 bg-gradient-to-br from-neutral-900 to-black border-2 border-purple-500/30 rounded-full flex flex-col items-center justify-center">
-                            <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 15h2m-2 4h2m10-4h2m-2 4h2M5 12h2m10 0h2m-2-4h2M5 8h2m10-4h2M9 6h6m-6 4h6m-6 4h6m-6 4h6"></path></svg>
-                            <h3 class="font-bold text-white text-sm">AI Knowledge</h3>
-                            <p class="text-[10px] text-purple-300 font-medium">Vector Database</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </footer>
     </div>
-    
-    <!-- 4. About Founder -->
-    <section id="founder" class="py-20 px-6 border-t border-white/5 bg-neutral-900/30">
-      <div class="max-w-3xl mx-auto text-center">
-        <!-- GUARANTEED IMAGE FIX: Alex Gardner (Text Placeholder) -->
-        <div class="w-32 h-32 mx-auto mb-6 overflow-hidden border-4 border-yellow-500 bg-neutral-800 flex items-center justify-center text-3xl font-black text-white">AG</div>
-        <h2 class="2xl font-bold mb-2">Meet Your Director: Alex Gardner</h2>
-        <p class="text-yellow-500 text-sm font-bold uppercase tracking-widest mb-6">Founder</p>
-        <p class="text-gray-300 leading-relaxed text-lg">Alex Gardner is a systems architect who builds high-leverage revenue engines. He led a $15M private equity turnaround, founded an outsourced sales firm for tech startups, and built a multi-million dollar e-commerce brand with just $500 and automated workflows. Today, through GenAI Directors, he combines deep business strategy with advanced AI orchestration to help founders build systems that scale without the headcount.</p>
-      </div>
-    </section>
 
-    <!-- 5. Testimonial Section (Recommendations) -->
-    <section id="testimonials" class="py-16 px-6 bg-neutral-900/30 border-t border-white/10">
-        <div class="max-w-7xl mx-auto text-center mb-12">
-            <h2 class="text-3xl font-bold mb-4">Hear from Leaders Who Got the Edge</h2>
-            <p class="text-gray-400">Real results from founders and executives using AI RainMaker Systems.</p>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <!-- Testimonial 1: Rob Colwill -->
-            <div class="p-8 rounded-2xl bg-neutral-900 border border-white/10 text-left shadow-xl">
-                <div class="flex items-center space-x-4 mb-4">
-                    <!-- GUARANTEED IMAGE FIX: Rob Colwill (Text Placeholder) -->
-                    <div class="w-16 h-16 bg-neutral-800 flex items-center justify-center text-xl font-bold text-gray-400 border border-white/10">RC</div>
-                    <div>
-                        <h4 class="font-bold text-xl text-white">Rob Colwill</h4>
-                        <p class="text-xs text-yellow-500">Builder AI | Amazon | Startup Founder</p>
-                    </div>
-                </div>
-                <p class="text-gray-300 italic mb-4">"Alex is a natural networker - he showed us several new ways to reach our target audience. He provided consistent lead generation and helped us explore better ways to connect and extend our brand on LinkedIn."</p>
-                <p class="text-xs text-gray-500">— Client at Coldwater Software</p>
-            </div>
-
-            <!-- Testimonial 2: George Pullar -->
-            <div class="p-8 rounded-2xl bg-neutral-900 border border-white/10 text-left shadow-xl">
-                <div class="flex items-center space-x-4 mb-4">
-                    <!-- GUARANTEED IMAGE FIX: George Pullar (Text Placeholder) -->
-                    <div class="w-16 h-16 bg-neutral-800 flex items-center justify-center text-xl font-bold text-gray-400 border border-white/10">GP</div>
-                    <div>
-                        <h4 class="font-bold text-xl text-white">George Pullar</h4>
-                        <p class="text-xs text-yellow-500">Former KPMG and IBM Executive</p>
-                    </div>
-                </div>
-                <p class="text-gray-300 italic mb-4">"Alex is a spectacular connector! I've known him for more than 10 years. He has connected our firm to influential partners and business owners across the country. He is diligent and seeks to understand the needs of his clients before taking action."</p>
-                <p class="text-xs text-gray-500">— Client at Axis Private Equity Group Windows</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. Strategic Value Summary (RainMaker Difference & Expert Human-in-the-Loop) -->
-    <section class="py-16 px-6 max-w-4xl mx-auto text-left md:text-center space-y-8 border-b border-white/10">
-        <div class="space-y-4">
-            <h3 class="text-2xl font-bold text-white">The RainMaker Difference</h3>
-            <p class="text-gray-300 leading-relaxed">Our RainMaker Agent isn't just a chatbot; it's a specialized intelligence engine fed with a proprietary knowledge base of top-tier sales materials, proven AI case studies, and RainMaker principles. We combine this with specific data about your industry to generate insights that generic models miss—giving you a precise architecture for your own 'Master Agent' system.</p>
-        </div>
-        <div class="space-y-4">
-            <h3 class="2xl font-bold text-white">Expert Human-in-the-Loop</h3>
-            <p class="text-gray-300 leading-relaxed">Automation is powerful, but strategy requires a human touch. Founder Alex Gardner personally oversees the prompting process for every roadmap, applying expert refinement to ensure your strategy is actionable, high-leverage, and specifically tailored to your business goals. We don't just hand you a tool; we hand you a competitive advantage.</p>
-        </div>
-    </section>
-
-    <!-- 7. Roadmap Details / Deliverable --><section id="deliverables" class="py-24 bg-black">
-      <div class="max-w-5xl mx-auto px-6">
-        <div class="text-center mb-16">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 mb-4"><svg class="w-3 h-3 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m-5 4h4m-7-2a2 2 0 01-2-2V5a2 2 0 012-2h10a2 2 0 012 2v14a2 2 0 01-2 2H7a2 2 0 01-2-2z"></path></svg><span class="text-xs font-bold text-yellow-500 uppercase">The Deliverable</span></div>
-          <h2 class="text-4xl font-bold mb-4">Your 20-Page AI Strategy Roadmap</h2>
-          <p class="text-gray-400 max-w-2xl mx-auto">This isn't just a "list of tools." It is a comprehensive architectural blueprint for building a self-driving business.</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div class="bg-neutral-900 border border-white/10 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-64 h-64 bg-green-500/5 rounded-full blur-3xl -mr-16 -mt-16"></div>
-            <h3 class="text-xl font-bold mb-6 text-white border-b border-white/10 pb-4">What's Inside The Report</h3>
-            <ul class="space-y-4">
-              <li class="flex items-start gap-3 text-gray-300"><svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-gray-200">Custom Agentic Workflow Design (Visual)</span></li>
-              <li class="flex items-start gap-3 text-gray-300"><svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-gray-200">Recommended Tool Stack (Budget Optimized)</span></li>
-              <li class="flex items-start gap-3 text-gray-300"><svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-gray-200">Implementation Timeline (30-60-90 Days)</span></li>
-              <li class="flex items-start gap-3 text-gray-300"><svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-gray-200">Risk Analysis & Security Protocols</span></li>
-              <li class="flex items-start gap-3 text-gray-300"><svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-gray-200">Content Strategy Engine Design</span></li>
-              <li class="flex items-start gap-3 text-gray-300"><svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-gray-200">Web Scraper & BI Setup Guide</span></li>
-              <li class="flex items-start gap-3 text-gray-300"><svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-gray-200">Sales Funnel Automation Map</span></li>
-              <li class="flex items-start gap-3 text-gray-300"><svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-gray-200">Vector Database Architecture</span></li>
-              <li class="flex items-start gap-3 text-gray-300"><svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-gray-200">GenAI Director Hacker Manual</span></li>
-            </ul>
-          </div>
-          <div class="flex flex-col justify-center space-y-8">
-            <div><h3 class="text-2xl font-bold mb-4 text-white">4 Pillars of Your System</h3><p class="text-gray-400 mb-6">We don't just connect tools. We orchestrate them around the four core functions that drive growth.</p></div>
-            <div class="space-y-6">
-              <div class="flex gap-4"><div class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 shrink-0"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.232z"></path></svg></div><div><h4 class="font-bold text-white">1. Content Creation System</h4><p class="text-sm text-gray-400">What to produce, how to produce it at scale, and where to distribute it automatically.</p></div></div>
-              <div class="flex gap-4"><div class="w-12 h-12 rounded-full bg-yellow-500/20 flex items-center justify-center text-yellow-400 shrink-0"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.674M12 3v18m-4.004-7.836A3.998 3.998 0 0112 9a3.998 3.998 0 014.341 3.164m-4.341 0a3.998 3.998 0 00-4.341 3.164m4.341-3.164v1.672"></path></svg></div><div><h4 class="font-bold text-white">2. Idea Generator</h4><p class="text-sm text-gray-400">A systematic way to use AI to brainstorm new products, angles, and offers daily.</p></div></div>
-              <div class="flex gap-4"><div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 shrink-0"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v5a2 2 0 01-2 2H3.055zm18.945 0H19a2 2 0 00-2 2v5a2 2 0 002 2h1.945M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div><div><h4 class="font-bold text-white">3. Business Intelligence</h4><p class="text-sm text-gray-400">Using web scrapers and agents to find prospects and monitor competitors in real-time.</p></div></div>
-              <div class="flex gap-4"><div class="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 shrink-0"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.25v2.5m0 3v2.5m0 3.5a1 1 0 100-2 1 1 0 000 2zM12 3a9 9 0 100 18 9 9 0 000-18z"></path></svg></div><div><h4 class="font-bold text-white">4. Sales Hacker Playbook</h4><p class="text-sm text-gray-400">A custom playbook on how to use the tools in a way that saves time and increases output.</p></div></div>
-            </div>
-          </div>
-        </div>
-    </section>
-
-    <!-- Pricing / CTA --><section id="pricing" class="py-24 px-6 relative overflow-hidden border-t border-white/10">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-green-600/10 rounded-full blur-[120px]"></div>
-        
-        <!-- Get Started Instructions -->
-        <div class="max-w-xl mx-auto mb-10 text-center">
-            <h3 class="text-2xl font-bold text-white">Get Started in 3 Steps</h3>
-            <div class="grid grid-cols-3 gap-4 text-sm text-gray-400">
-                <div class="flex flex-col items-center">
-                    <span class="text-green-500 text-xl font-bold">1.</span>
-                    <p>Pay for Roadmap</p>
-                </div>
-                <div class="flex flex-col items-center">
-                    <span class="text-green-500 text-xl font-bold">2.</span>
-                    <button onclick="openModal()" class="text-blue-400 hover:text-blue-300 underline font-bold">Fill Out 10-Point Intake Form</button>
-                </div>
-                <div class="flex flex-col items-center">
-                    <span class="text-green-500 text-xl font-bold">3.</span>
-                    <p>Receive Your Blueprint in 5 Business Days</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="relative max-w-lg mx-auto bg-black border border-white/20 rounded-3xl p-10 text-center shadow-2xl">
-          <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-purple-500 via-green-500 to-blue-500"></div>
-          <h3 class="text-gray-400 uppercase tracking-widest text-sm font-bold mb-4">Launch Offer</h3>
-          <div class="text-6xl font-black text-white mb-2">$150</div>
-          <p class="text-gray-500 mb-8">One-time payment. No hidden fees.</p>
-          <ul class="text-left space-y-4 mb-10 max-w-xs mx-auto">
-            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-gray-200">Full AI System Architecture Roadmap</span></li>
-            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-gray-200">90-Day Execution Plan</span></li>
-            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-gray-200">RainMaker Agent Strategy Guide</span></li>
-            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-gray-200">New Business Line Identification</span></li>
-            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-gray-200">Automation Tool Recommendations</span></li>
-          </ul>
-          <a href="https://www.paypal.com/ncp/payment/8EZPL9RB9JGTW" target="_blank" class="w-full py-4 text-white font-bold rounded-xl text-lg shine-button animate-shimmer flex items-center justify-center gap-2">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-2 4h4m1.17-5.17l-1.41-1.41m2.82-2.82l-1.41-1.41m2.12 4.24l-1.41 1.41m-2.83-2.83l-1.41-1.41M12 9a2 2 0 100-4 2 2 0 000 4z"></path></svg> Get Started (Pay Here)
-          </a>
-          <p class="mt-4 text-xs text-gray-500">Secure 256-bit SSL Payment via PayPal</p>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="py-20 max-w-3xl mx-auto px-6">
-        <h2 class="3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
-        <div class="space-y-4" id="faq-container">
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h4 class="font-bold text-lg text-gray-200">Why is this only $150?</h4>
-                    <svg class="w-5 h-5 text-green-500 transform transition-transform duration-300" data-icon="arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </div>
-                <div class="faq-answer">
-                    <p class="text-gray-400">We use our own AI, the RainMakers Agent, to do 80% of the heavy lifting that human consultants usually charge thousands for. Founder Alex Gardner provides the expert prompt engineering, and we pass the immense savings to you.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h4 class="font-bold text-lg text-gray-200">Do I need technical skills to use the roadmap?</h4>
-                    <svg class="w-5 h-5 text-green-500 transform transition-transform duration-300" data-icon="arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </div>
-                <div class="faq-answer">
-                    <p class="text-gray-400">No. We break down the strategy into plain English with clear 'Next Steps' and recommend tools that are user-friendly. The roadmap is designed for founders and CEOs, not engineers.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h4 class="font-bold text-lg text-gray-200">How long does the roadmap take?</h4>
-                    <svg class="w-5 h-5 text-green-500 transform transition-transform duration-300" data-icon="arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </div>
-                <div class="faq-answer">
-                    <p class="text-gray-400">Once you complete our 10-point questionnaire, your custom roadmap is delivered via PDF to your inbox within 5 business days.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-12 border-t border-white/10 text-center text-gray-600 text-sm">
-        <p>&copy; 2025 GenAI Directors. Powered by RainMakers Agent.</p>
-        <div class="mt-8">
-            <!-- Preview Success Page Link -->
-            <a href="javascript:void(0)" onclick="window.location.href = window.location.pathname + '?success=true'" class="text-xs text-gray-700 hover:text-green-500">[Preview: Success Page]</a>
-        </div>
-    </footer>
-
-    <script>
-        // Form Submission Logic
-        document.getElementById('finalSubmitButton').addEventListener('click', function(e) {
-            e.preventDefault(); 
-            
-            // Collect answers
-            const answers = [
-                document.getElementById('q1').value,
-                document.getElementById('q2').value,
-                document.getElementById('q3').value,
-                document.getElementById('q4').value,
-                document.getElementById('q5').value,
-                document.getElementById('q6').value,
-                document.getElementById('q7').value,
-                document.getElementById('q8').value,
-                document.getElementById('q9').value,
-                document.getElementById('q10').value,
-            ];
-
-            // In a real application, you would send this data to a backend webhook BEFORE opening PayPal.
-            // For this demo, we assume the data is captured upon clicking this button.
-
-            // 1. Validate form fields are not empty (basic validation)
-            let formValid = true;
-            for (let i = 1; i <= 10; i++) {
-                if (document.getElementById(`q${i}`).value.trim() === "") {
-                    formValid = false;
-                    break;
-                }
-            }
-
-            if (formValid) {
-                // 2. Open PayPal in a new tab
-                window.open('https://www.paypal.com/ncp/payment/8EZPL9RB9JGTW', '_blank');
-                
-                // 3. NOTE: We rely on PayPal's post-payment redirect setting back to ?success=true
-                // For the purpose of this demonstration, we simulate success after submission.
-                setTimeout(() => {
-                     window.location.href = window.location.pathname + '?success=true';
-                }, 500); 
-
-                closeModal();
-            } else {
-                 // Use a custom message box instead of alert()
-                 alert('Please answer all 10 questions before submitting.');
-            }
-        });
-
-
-        function openModal() {
-            document.getElementById('questionnaireModal').style.display = 'block';
-            document.body.style.overflow = 'hidden'; 
-        }
-
-        function closeModal() {
-            document.getElementById('questionnaireModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        // --- FAQ Logic ---
-        document.addEventListener('DOMContentLoaded', function() {
-            const items = document.querySelectorAll('.faq-item');
-            items.forEach(item => {
-                const question = item.querySelector('.faq-question');
-                const answer = item.querySelector('.faq-answer');
-                const icon = item.querySelector('[data-icon="arrow"]');
-
-                question.addEventListener('click', () => {
-                    const isOpen = answer.classList.contains('open');
-
-                    // Close all others
-                    document.querySelectorAll('.faq-answer.open').forEach(a => a.classList.remove('open'));
-                    document.querySelectorAll('[data-icon="arrow"]').forEach(i => i.style.transform = 'rotate(0deg)');
-
-                    // Open current one if it was closed
-                    if (!isOpen) {
-                        answer.classList.add('open');
-                        icon.style.transform = 'rotate(180deg)';
-                    }
-                });
-            });
-        });
-
-        // --- View Logic (To show Success Page for testing) ---
-        if (window.location.search.includes('success=true')) {
-             // Change the body content to the Success View content
-             document.body.innerHTML = `
-                <div class="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6 text-center">
-                    <div class="w-24 h-24 bg-green-500/20 rounded-full flex items-center justify-center mb-8 animate-bounce">
-                        <svg class="w-12 h-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                    </div>
-                    <h1 class="4xl md:text-5xl font-bold mb-4">Payment & Submission Received!</h1>
-                    <p class="text-xl text-gray-400 mb-8 max-w-xl">Welcome to the future of your business. Your payment was successful, and your strategic intake has been securely submitted.</p>
-                    
-                    <div class="w-full max-w-2xl bg-neutral-900 border border-white/10 rounded-2xl p-8">
-                        <div class="flex items-center justify-center gap-3 mb-6 border-b border-white/10 pb-4">
-                            <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
-                            <h3 class="text-xl font-bold">What Happens Next</h3>
-                        </div>
-                        <p class="text-gray-300 text-sm mb-6">Founder Alex Gardner will now personally review your 10 strategic answers and feed them into the RainMaker Agent for deep analysis. Your custom 20-page roadmap will be delivered to your email within 5 business days.</p>
-                        
-                        <a href="javascript:void(0)" onclick="window.location.href = window.location.pathname" class="mt-4 px-8 py-3 bg-neutral-800 hover:bg-neutral-700 border border-white/10 rounded-full font-medium text-gray-300 transition-colors inline-flex items-center gap-2">
-                           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg> Back to Home
-                        </a>
-                    </div>
-                </div>
-            `;
-        }
-    </script>
 </body>
 </html>
+
