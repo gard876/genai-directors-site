@@ -3,231 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GenAI Directors | Strategy & Transformation</title>
+    <title>GenAI Directors | AI RevOps Consulting for SMBs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        /* COLOR PALETTE (60-30-10 Rule)
-           --------------------------------------------------
-           60% Primary:   #0b2416 (Deep Forest Green)
-           30% Secondary: #1c1917 (Dark Earthy Brown/Charcoal)
-           10% Accent:    #d4af37 (Metallic Gold)
-           
-           SPICE COLORS (Subtle Tech Gradients):
-           Purple: #9d4edd, Orange: #fb8500, Bright Green: #00ff41
-        */
-
         :root {
-            --bg-primary: #0b2416;
-            --bg-secondary: #1c1917;
-            --text-main: #e5e7eb;
-            --text-muted: #a3a3a3;
-            --accent-gold: #d4af37;
-            --gradient-spice: linear-gradient(90deg, #9d4edd 0%, #fb8500 50%, #00ff41 100%);
+            --neon-blue: #00d4ff;
+            --neon-pink: #ff00ff;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-main);
-            line-height: 1.8;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem 1rem;
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            scroll-behavior: smooth;
         }
-
-        /* MAIN CONTAINER */
-        .card {
-            background-color: var(--bg-secondary);
-            max-width: 800px;
-            width: 100%;
-            border-radius: 4px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(212, 175, 55, 0.1); /* Subtle gold border */
+        .bg-gradient-tech {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(255, 0, 255, 0.1) 100%);
         }
-
-        /* TOP BORDER ACCENT (The Spice) */
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-spice);
-        }
-
-        .content-wrapper {
-            padding: 3rem 2.5rem;
-        }
-
-        /* HEADER SECTION */
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 2rem;
-        }
-
-        /* PROFILE IMAGE FRAME */
-        .profile-frame {
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 1.5rem auto;
-            border-radius: 50%;
-            padding: 3px;
-            /* Gradient border using the spice colors */
-            background: var(--gradient-spice);
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.15); /* Subtle green glow */
-        }
-
-        .profile-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 4px solid var(--bg-secondary);
-            background-color: #333;
-            display: block;
-        }
-
-        h1 {
-            color: var(--accent-gold);
-            font-family: 'Georgia', 'Times New Roman', serif;
-            font-size: 2.5rem;
-            font-weight: 400;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-        }
-
-        .subtitle {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-        }
-
-        /* TEXT CONTENT */
-        .prose {
-            color: #d1d5db;
-            font-size: 1.05rem;
-        }
-
-        .prose p {
-            margin-bottom: 1.5rem;
-            text-align: justify; /* Sophisticated alignment */
-        }
-
-        /* Highlight specific dates or terms */
-        .highlight {
-            color: white;
-            font-weight: 600;
-        }
-        
-        /* Subtle colored highlights for specific terms to use the spice palette sparingly */
-        .accent-green { color: #00ff41; }
-
-        /* FOOTER / CONTACT */
-        footer {
-            background-color: rgba(0, 0, 0, 0.2);
-            padding: 2rem;
-            text-align: center;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
-        }
-
-        .cta-container {
-            display: inline-block;
-            border: 1px solid var(--accent-gold);
-            padding: 1rem 2rem;
-            margin-top: 1rem;
+        .text-neon-blue { color: var(--neon-blue); }
+        .text-neon-pink { color: var(--neon-pink); }
+        .border-neon {
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
         }
-
-        .cta-container:hover {
-            background-color: rgba(212, 175, 55, 0.1);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        .border-neon:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
         }
-
-        .contact-label {
-            display: block;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--accent-gold);
-            margin-bottom: 0.5rem;
+        .pink-glow:hover {
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
         }
-
-        .email-link {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: bold;
-            font-family: 'Georgia', serif;
+        .nav-link:hover {
+            color: var(--neon-blue);
         }
-
-        /* RESPONSIVE TWEAKS */
-        @media (max-width: 600px) {
-            h1 { font-size: 1.8rem; }
-            .content-wrapper { padding: 2rem 1.5rem; }
-            .prose p { text-align: left; }
+        .hero-image-container {
+            position: relative;
+        }
+        .hero-image-container::after {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink));
+            z-index: -1;
+            filter: blur(15px);
+            opacity: 0.5;
+            border-radius: 0.5rem;
+        }
+        .accent-bar {
+            height: 4px;
+            width: 60px;
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-pink));
         }
     </style>
 </head>
-<body>
+<body class="overflow-x-hidden">
 
-    <div class="card">
-        <div class="content-wrapper">
-            <header>
-                <div class="profile-frame">
-                    <img src="https://i.postimg.cc/63XC3dGq/Untitled-(1).png" alt="Founder Portrait" class="profile-img">
-                </div>
-                <h1>GenAI Directors</h1>
-                <div class="subtitle">Digital Transformation & Strategy</div>
-            </header>
-
-            <div class="prose">
-                <p>
-                    I started <strong>GenAI Directors</strong> after discovering a gap in the marketplace for business consulting services within SMBs. Historically, businesses would outsource Software/CRM Development, Digital Marketing, and Information Security to three different companies. While that may still be the case for many companies in the future, a major shift is happening.
-                </p>
-                <p>
-                    New AI job roles have been created within enterprise companies, with consulting firms like Accenture, BCG, and the Big 4 leading digital transformation projects. These initiatives create strategy roadmaps for companies to leverage GenAI in their business operations.
-                </p>
-                <p>
-                    GenAI Directors and Chief AI Officers do not come from a specific background; however, many in IT, Sales, and Communications are assuming these roles. GenAI Creative Director positions are now being created at large marketing firms. I identified this trend early after seeing Chase Bank create a position for a GenAI Director in mid-2025.
-                </p>
-                <p>
-                    I secured the domains <span class="highlight">genaidirectors.com</span> and <span class="highlight">genaicreativedirector.com</span>. I spent the second half of the year researching this new emerging job role and the approaches consulting firms take for digital transformation strategy roadmaps. Leveraging my network of talented Software Architects, Digital Marketers, and Security Professionals, I created a methodology to complete high-level creative strategy roadmaps for SMBs.
-                </p>
-                <p>
-                    I am not sure where the direction of GenAIDirectors.com will go in the future. However, for now, a resource-based website is coming soon, featuring blogs and eBooks.
-                </p>
-                <p>
-                    <span class="highlight" style="border-bottom: 2px solid #fb8500;">As of mid-January 2026, I am accepting clients for digital transformation strategy roadmaps.</span> The goal is to maximize RevOps using new <span class="accent-green">GenAI</span> and <span class="accent-green">Agentic AI</span> that can be leveraged into your current tech stack.
-                </p>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl font-extrabold tracking-tighter italic">
+                    GENAI<span class="text-neon-blue">DIRECTORS</span>
+                </span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-medium uppercase tracking-widest">
+                <a href="#about" class="nav-link transition-colors">About</a>
+                <a href="#services" class="nav-link transition-colors">Services</a>
+                <a href="#philosophy" class="nav-link transition-colors">Methodology</a>
+                <a href="#contact" class="nav-link transition-colors">Contact</a>
             </div>
         </div>
+    </nav>
 
-        <footer>
-            <p style="color: #888; font-size: 0.9rem; margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-                We provide you with a strategy roadmap including a well-thought-out review and plan for the future, backed by me and my internal team of contractors and consulting firms.
-            </p>
-            
-            <div class="cta-container">
-                <span class="contact-label">Contact Me</span>
-                <a href="mailto:alex@genaidirectors.com" class="email-link">alex@genaidirectors.com</a>
+    <!-- Hero Section -->
+    <section id="about" class="pt-32 pb-20 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div class="order-2 md:order-1">
+                <div class="accent-bar mb-6"></div>
+                <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-8">
+                    The Premier AI RevOps <br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] to-[#ff00ff]">
+                        Strategic Consulting
+                    </span> 
+                    for SMBs.
+                </h1>
+                <p class="text-xl text-gray-300 leading-relaxed mb-8">
+                    GenAI Directors is an AI RevOps consulting firm for SMBs. Founded by a multidisciplined professional in Sales, Marketing, Ecommerce, Software Development, and Entrepreunership, our thought leadership is second to none. After consulting with former leaders at Fortune 500 technology and consulting firms we created a service line and methodology behind it to deliver meaningful opportunities and insights that can be capitalized on now for increased sales and lower operational costs.
+                </p>
+                <a href="#services" class="inline-block bg-white text-black px-8 py-4 font-bold uppercase tracking-widest hover:bg-neon-blue hover:text-white transition-all">
+                    Explore Service Lines
+                </a>
             </div>
-        </footer>
-    </div>
+            <div class="order-1 md:order-2 flex justify-center md:justify-end">
+                <div class="hero-image-container w-full max-w-md">
+                    <img 
+                        src="https://i.postimg.cc/63XC3dGq/Untitled-(1).png" 
+                        alt="Alex Gardner - Founder of GenAI Directors" 
+                        class="rounded-lg shadow-2xl grayscale hover:grayscale-0 transition-all duration-700 w-full object-cover"
+                        onerror="this.src='https://via.placeholder.com/600x800/111/fff?text=Alex+Gardner+Founder'"
+                    >
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Services Section -->
+    <section id="services" class="py-24 px-6 bg-gradient-tech">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4 uppercase tracking-tighter">Custom Deliverables</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Focused strategic assessments designed to transform your current assets into a future-ready AI ecosystem.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Service 1 -->
+                <div class="p-8 bg-black/50 border-neon rounded-xl flex flex-col h-full">
+                    <div class="mb-6 flex justify-between items-start">
+                        <i data-lucide="eye" class="w-12 h-12 text-neon-blue"></i>
+                        <span class="text-sm font-mono text-neon-blue">Analysis 01</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Executive Summary GenAI Use Case Report</h3>
+                    <p class="text-gray-400 mb-8 flex-grow leading-relaxed">
+                        A high level opportunity identifier analysis of how the latest GenAI capabilities can be used by the business to get better business intelligence, improve CRM operations, improve the intranet, and creatively mix and match the tools and platforms in the best orchestrated way.
+                    </p>
+                    <div class="border-t border-white/10 pt-6 mt-6">
+                        <p class="text-sm uppercase tracking-widest text-gray-500 mb-1">Investment Range</p>
+                        <p class="text-3xl font-bold text-neon-blue">$500 — $10,000</p>
+                        <p class="text-xs text-gray-500 mt-2 font-mono">*Price scales with company size</p>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="p-8 bg-black/50 border-neon pink-glow rounded-xl flex flex-col h-full">
+                    <div class="mb-6 flex justify-between items-start">
+                        <i data-lucide="map" class="w-12 h-12 text-neon-pink"></i>
+                        <span class="text-sm font-mono text-neon-pink">Analysis 02</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">GenAI Strategic Roadmap Report</h3>
+                    <p class="text-gray-400 mb-8 flex-grow leading-relaxed">
+                        An in-depth analysis beyond the Executive Summary involving a deeper technical architecture roadmap of your current database foundation. Includes migration planning to AI-powered CRM systems built on Vector Databases and agents, cost breakdowns, and prioritized implementation schedules.
+                    </p>
+                    <div class="border-t border-white/10 pt-6 mt-6">
+                        <p class="text-sm uppercase tracking-widest text-gray-500 mb-1">Investment Range</p>
+                        <p class="text-3xl font-bold text-neon-pink">$1,500 — $25,000</p>
+                        <p class="text-xs text-gray-500 mt-2 font-mono">*Price scales with complexity and data volume</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy / About Detail -->
+    <section id="philosophy" class="py-24 px-6 border-y border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-12">
+                <div class="md:col-span-2">
+                    <h2 class="text-3xl font-bold mb-8 uppercase text-neon-blue">Strategic Asset Management</h2>
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                        GenAI Directors is a strategic consulting firm for Asset Management. We help you complete a Creative Strategic Assessment of your Assets currently under Management. It is in the power of mixing and matching of the latest GenAI and Agentic capabilities along with precise prompting and industry based insights that can unfold an entirely new way of doing business both externally and internally.
+                    </p>
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        The future will be won by many innovative SMB companies that take action now on leveraging the AI technology. GenAI Directors gives companies a fast turnaround within 30 days of where a company is at now and where they could be relative to their own entity and their competitors.
+                    </p>
+                </div>
+                <div class="bg-white/5 p-8 rounded-lg border border-white/10 h-fit">
+                    <h4 class="font-bold text-neon-pink uppercase tracking-widest mb-4">Message from the Founder</h4>
+                    <p class="text-sm text-gray-300 italic mb-4 leading-relaxed">
+                        "We do not employ software developers. After working many years in Business Development for Tax Consulting, IT Consulting, and Digital Marketing firms, along with being an Entrepreneur for 15 years contracting out consultants as well, I am uniquely qualified to help SMBs navigate this turbulent time of both new opportunities and risks that simultaneously have entered the arena. I consult with my internal network of independent, talented Veteran Software Architects to ensure every report is backed by technical excellence."
+                    </p>
+                    <p class="text-neon-pink font-bold text-sm tracking-widest">
+                        ALEX GARDNER <span class="text-gray-500 font-normal">| FOUNDER</span>
+                    </p>
+                    <div class="mt-6 flex items-center space-x-2">
+                        <div class="w-2 h-2 rounded-full bg-neon-pink animate-pulse"></div>
+                        <span class="text-xs uppercase font-bold tracking-tighter text-gray-400">Verified Technical Architecture</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 px-6 text-center">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-4xl md:text-6xl font-black mb-6 uppercase italic tracking-tighter">Ready to <span class="text-neon-blue">Direct</span> your future?</h2>
+            <p class="text-xl text-gray-400 mb-12">Reach out directly to begin your Strategic Assessment.</p>
+            
+            <div class="inline-block p-[2px] bg-gradient-to-r from-neon-blue to-neon-pink rounded-lg group">
+                <a href="mailto:alex@genaidirectors.com" class="block bg-black px-12 py-6 rounded-lg text-2xl md:text-3xl font-bold hover:bg-transparent transition-all duration-300">
+                    alex@genaidirectors.com
+                </a>
+            </div>
+            
+            <p class="mt-12 text-gray-500 font-mono text-sm">
+                NO FORMS. NO FRICTION. DIRECT PARTNERSHIP.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-white/10 text-center">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <div class="text-xl font-extrabold italic">
+                GENAI<span class="text-neon-blue">DIRECTORS</span>
+            </div>
+            <div class="text-gray-500 text-xs tracking-widest uppercase">
+                &copy; 2026 GenAI Directors. All Rights Reserved. | www.genaidirectors.com
+            </div>
+            <div class="flex space-x-6">
+                <a href="#" class="text-gray-500 hover:text-white transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                <a href="#" class="text-gray-500 hover:text-white transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Smooth reveal animations on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100');
+                    entry.target.classList.remove('translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-1000', 'transform', 'translate-y-10', 'opacity-0');
+            observer.observe(section);
+        });
+    </script>
 </body>
 </html>
-
